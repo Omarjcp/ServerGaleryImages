@@ -3,7 +3,7 @@ const createUser = require("../controllers/createUser.contr");
 
 const router = Router();
 
-//ruta create user
+//ruta create users
 router.get("/", createUser);
 
 module.exports = router;
