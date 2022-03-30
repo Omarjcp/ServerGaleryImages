@@ -2,10 +2,15 @@ const fs = require("fs");
 const { Sequelize } = require("sequelize");
 const path = require("path");
 
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_NAME,
+} = require("../node_modules/utilsDb");
 
-let sequelize = new Sequelize("galerydb", "root", "4530447omar", {
-  host: "127.0.0.1",
+let sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
+  host: DB_HOST,
   dialect: "mysql",
 });
 
