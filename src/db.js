@@ -2,12 +2,14 @@ const fs = require("fs");
 const { Sequelize } = require("sequelize");
 const path = require("path");
 
-const {
-  DB_USER,
-  DB_PASSWORD,
-  DB_HOST,
-  DB_NAME,
-} = require("../node_modules/utilsDb");
+// const {
+//   DB_USER,
+//   DB_PASSWORD,
+//   DB_HOST,
+//   DB_NAME,
+// } = require("../node_modules/utilsDb");
+const dotenv = require("dotenv").config();
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 
 let sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASSWORD, {
   host: DB_HOST,
@@ -40,9 +42,11 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { User } = sequelize.models;
+const { Users, Images } = sequelize.models;
 
 // Aca vendrian las relaciones
+Users.hasMany(Images);
+Images.belongsTo(Users);
 
 module.exports = {
   ...sequelize.models, // para poder importar los modelos así: const { Producto, Categoria } = require('./db.js');
