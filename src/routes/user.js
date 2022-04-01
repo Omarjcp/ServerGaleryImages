@@ -16,6 +16,6 @@ router.get("/:id", midAccToken, getUserForId);
 router.post("/", createUser);
 
 //route update user
-router.put("/:id", updateUser);
+router.put("/:id", midAccToken, updateUser);
 
 module.exports = router;
