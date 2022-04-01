@@ -10,7 +10,6 @@ module.exports = (sequelize) => {
     },
     photo: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -28,6 +27,9 @@ module.exports = (sequelize) => {
     },
     password: {
       type: DataTypes.STRING,
+    },
+    isWithGoogle: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
     },
   });
