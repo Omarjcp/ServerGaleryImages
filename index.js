@@ -5,6 +5,6 @@ const port = process.env.PORT || 3001;
 
 conn.sync({ alter: false }).then(() => {
   server.listen(port, async () => {
-    console.log("servidor arrancado! en el puerto 3306");
+    console.log("servidor arrancado! en el puerto 3001");
   });
 });

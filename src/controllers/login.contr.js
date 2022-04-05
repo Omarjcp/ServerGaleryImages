@@ -4,7 +4,7 @@ const { Users } = require("../db");
 
 const singIn = async (req, res) => {
   try {
-    const { email, password, isWithGoogle } = req.body;
+    const { email, password, isWithGoogle, name, photo } = req.body;
 
     if (isWithGoogle) {
       let userGoogleDb = await Users.findOne({ where: { email } });
@@ -14,12 +14,31 @@ const singIn = async (req, res) => {
 
         res.send({
           token: token,
+          user: userGoogleDb,
           msg: "Login with google successfull",
         });
       } else {
-        res.json({
-          msg: "Invalid credentials",
+        let userCreatedWithGoogle = await Users.create({
+          email: email,
+          name: name ? name : email,
+          photo: photo ? photo : "",
+          bio: `Bio de ${name}`,
+          phone: "",
+          isWithGoogle: isWithGoogle,
         });
+
+        if (userCreatedWithGoogle) {
+          let token = jwt.sign({ email }, "secretKey");
+          res.send({
+            token: token,
+            user: userCreatedWithGoogle,
+            msg: "Login successfull",
+          });
+        } else {
+          res.send({
+            msg: "Error to sign in",
+          });
+        }
       }
     } else {
       if (email && password) {
@@ -31,6 +50,7 @@ const singIn = async (req, res) => {
           let token = jwt.sign({ email }, "secretKey");
           res.send({
             token: token,
+            user: userDb,
             msg: "Login successfull",
           });
         } else {
