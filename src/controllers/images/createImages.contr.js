@@ -15,7 +15,7 @@ const createImage = async (req, res) => {
           const imageCreated = await Images.create({
             image,
             name,
-            description: description ? description : "",
+            description: description ? description : name,
             userId,
           });
 
