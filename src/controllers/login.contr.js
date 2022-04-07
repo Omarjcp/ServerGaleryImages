@@ -1,13 +1,16 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
-const { Users } = require("../db");
+const { Users, Images } = require("../db");
 
 const singIn = async (req, res) => {
   try {
     const { email, password, isWithGoogle, name, photo } = req.body;
 
     if (isWithGoogle) {
-      let userGoogleDb = await Users.findOne({ where: { email } });
+      let userGoogleDb = await Users.findOne({
+        where: { email },
+        include: Images,
+      });
 
       if (userGoogleDb) {
         let token = jwt.sign({ email }, "secretKey");
