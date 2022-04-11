@@ -30,7 +30,10 @@ const updateUser = async (req, res) => {
                 },
               }
             );
-            let userUpdate = await Users.findOne({ where: { id } });
+            let userUpdate = await Users.findOne({
+              where: { id },
+              include: Images,
+            });
             res.send({
               msg: "User of google update successfull",
               user: userUpdate,
@@ -56,7 +59,10 @@ const updateUser = async (req, res) => {
                     },
                   }
                 );
-                let userUpdate = await Users.findOne({ where: { id } });
+                let userUpdate = await Users.findOne({
+                  where: { id },
+                  include: Images,
+                });
                 res.send({
                   msg: "User update successfull",
                   user: userUpdate,
