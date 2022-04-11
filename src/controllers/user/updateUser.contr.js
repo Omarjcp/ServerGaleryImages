@@ -30,8 +30,10 @@ const updateUser = async (req, res) => {
                 },
               }
             );
+            let userUpdate = await Users.findOne({ where: { id } });
             res.send({
               msg: "User of google update successfull",
+              user: userUpdate,
             });
           } else if (userDb && !userDb.isWithGoogle) {
             let roundsToHash = 10;
@@ -54,8 +56,10 @@ const updateUser = async (req, res) => {
                     },
                   }
                 );
+                let userUpdate = await Users.findOne({ where: { id } });
                 res.send({
                   msg: "User update successfull",
+                  user: userUpdate,
                 });
               }
             });
