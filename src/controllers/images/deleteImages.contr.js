@@ -11,10 +11,10 @@ const deleteImages = async (req, res) => {
         });
       } else {
         if (id) {
-          const imageDb = await Images.findOne({ where: id });
+          const imageDb = await Images.findOne({ where: { id } });
 
           if (imageDb) {
-            await Images.destroy({ where: id });
+            await Images.destroy({ where: { id } });
 
             res.send({
               msg: "Image delete successfull",
