@@ -3,7 +3,7 @@ const { Images } = require("../../db");
 
 const deleteImages = async (req, res) => {
   try {
-    const { id } = req.param;
+    const { id } = req.params;
 
     jwt.verify(req.token, "secretKey", async (err, data) => {
       if (err) {
