@@ -12,7 +12,7 @@ const updateImages = async (req, res) => {
         });
       } else {
         if (id) {
-          const imageDb = await Images.findOne({ where: id });
+          const imageDb = await Images.findOne({ where: { id } });
 
           if (imageDb) {
             await Images.update(
