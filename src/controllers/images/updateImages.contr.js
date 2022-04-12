@@ -1,3 +1,4 @@
+const jwt = require("jsonwebtoken");
 const { Images } = require("../../db");
 
 const updateImages = async (req, res) => {
